@@ -1,0 +1,19 @@
+# Node modules
+/node_modules
+/frontend/node_modules
+
+# .env files containing sensitive information
+/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build files
+/frontend/build
+/backend/build
+
+# OS-specific files
+.DS_Store
+Thumbs.db

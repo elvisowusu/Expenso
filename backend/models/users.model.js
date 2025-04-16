@@ -13,8 +13,13 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true,"password required"],
+        required: [true, "password required"],
     },
+    balance: {
+        type: Number,
+        required: [true, "balance is required"],
+        default: 0
+    }
 }, { timestamps: true });
 
 const userModel = mongoose.model('User', userSchema);

@@ -1,7 +1,7 @@
 import asyncHandler from "../../../handlers/asyncHandler";
 import userModel from "../../../models/users.model";
 
-const registration = asyncHandler(async (req, res) => {
+const register = asyncHandler(async (req, res) => {
     const { name, email, password } = res.body;
     await userModel.create({
         name,
@@ -14,4 +14,4 @@ const registration = asyncHandler(async (req, res) => {
         message: 'account added'
     })
 });
-export default registration;
+export default register;

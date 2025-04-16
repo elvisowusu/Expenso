@@ -1,8 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
-
-import registration from "./modules/users/controllers/registration.controller.js";
+import userRoutes from "./modules/users/users.route.js";
 configDotenv()
 
 // Connect to MongoDB
@@ -17,8 +16,8 @@ mongoose.connect(process.env.mongoDb_connection_string, {})
 const app = express();
 app.use(express.json());
 
-app.post('/api/user', registration);
-
+// Routes
+app.use('/api/users',userRoutes)
 // Health check & 404
 app.get('/', (req, res) => res.json({ status: 'success', message: 'Expenso API is running' }));
 

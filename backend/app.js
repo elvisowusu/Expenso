@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const userRouter = require("./modules/users/users.route");
 require("dotenv").config();
-const userRoutes = require("./modules/users/users.route");
 
 const app = express();
 app.use(express.json());
@@ -17,7 +17,7 @@ mongoose
   });
 
 // Routes
-app.use("/api/users", userRoutes);
+app.use("/api/users", userRouter);
 
 // Health check
 app.get("/", (req, res) =>

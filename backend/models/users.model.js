@@ -1,34 +1,37 @@
-import mongoose from "mongoose";
-import argon2 from "argon2";
+const mongoose = require("mongoose");
+const argon2 = require("argon2");
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: [true, "Name required"],
+      type: String,
+      required: [true, "Name required"],
     },
     email: {
-        type: String,
-        required: [true,"Email required"],
-        unique: [true,"Email already exist"],
+      type: String,
+      required: [true, "Email required"],
+      unique: [true, "Email already exist"],
     },
     password: {
-        type: String,
-        required: [true, "password required"],
+      type: String,
+      required: [true, "Password required"],
     },
     balance: {
-        type: Number,
-        required: [true, "balance is required"],
-        default: 0
-    }
-}, { timestamps: true });
+      type: Number,
+      required: [true, "Balance is required"],
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
 
-userSchema.pre('save',async function (next) {
-    if (this.isModified(this.password)) {
-        this.password= await argon2.hash(this.password)
-    }
-    next();
-})
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await argon2.hash(this.password);
+  }
+  next();
+});
 
-const userModel = mongoose.model('User', userSchema);
+const userModel = mongoose.model("User", userSchema);
 
-export default userModel;
+module.exports = userModel;

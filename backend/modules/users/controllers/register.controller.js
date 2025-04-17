@@ -1,17 +1,19 @@
-import asyncHandler from "../../../handlers/asyncHandler.js";
-import userModel from "../../../models/users.model.js";
+const asyncHandler = require("../../../handlers/asyncHandler");
+const userModel = require("../../../models/users.model");
 
 const register = asyncHandler(async (req, res) => {
-    const { name, email, password } = res.body;
-    await userModel.create({
-        name,
-        email,
-        password
-    })
+  const { name, email, password } = req.body;
 
-    res.status(200).json({
-        status: 'success',
-        message: 'account added'
-    })
+  await userModel.create({
+    name,
+    email,
+    password,
+  });
+
+  res.status(201).json({
+    status: "success",
+    message: "Account added",
+  });
 });
-export default register;
+
+module.exports = register;

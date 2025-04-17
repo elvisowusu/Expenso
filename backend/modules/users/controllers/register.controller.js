@@ -1,5 +1,5 @@
-import asyncHandler from "../../../handlers/asyncHandler";
-import userModel from "../../../models/users.model";
+import asyncHandler from "../../../handlers/asyncHandler.js";
+import userModel from "../../../models/users.model.js";
 
 const register = asyncHandler(async (req, res) => {
     const { name, email, password } = res.body;

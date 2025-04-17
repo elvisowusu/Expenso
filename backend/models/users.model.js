@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import argon2 from "argon2";
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -21,6 +21,13 @@ const userSchema = new mongoose.Schema({
         default: 0
     }
 }, { timestamps: true });
+
+userSchema.pre('save',async function (next) {
+    if (this.isModified(this.password)) {
+        this.password= await argon2.hash(this.password)
+    }
+    next();
+})
 
 const userModel = mongoose.model('User', userSchema);
 

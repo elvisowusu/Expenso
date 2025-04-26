@@ -37,12 +37,13 @@ const login = asyncHandler(async (req, res) => {
     const accessToken = await jwt.sign({
         id: getUser._id,
         name: getUser.name,
-    })
+    }, process.env.jwt_key)
+    
 
     res.status(200).json({
         status: 'success',
         message: 'login successful',
-        accessToken:accessToken
+        accessToken
     })
 })
 

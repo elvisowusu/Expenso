@@ -1,12 +1,36 @@
 const asyncHandler = require("../../../handlers/asyncHandler");
 const userModel = require("../../../models/users.model");
+const argon2 = require("argon2")
 
 const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
-    await userModel.findOne({
-        email:email
+    // check inputs 
+    if (!email || !password) res.status(400).json({
+        status: "failed",
+        message:"Email and password are required"
     })
+
+    // find the user
+    const getUser = await userModel.findOne({
+        email:email
+    }).select("+password")
+
+      // If user doesn't exist
+    if (!getUser) {
+        return res.status(401).json({
+            status: "fail",
+            message: "Invalid email."
+        });
+    }
+
+    const isPasswordValid = await argon2.verify(getUser.password, password)
+      if (!isPasswordValid) {
+        return res.status(401).json({
+            status: "fail",
+            message: "Invalid password."
+        });
+    }
 
     res.status(200).json({
         status: 'success',

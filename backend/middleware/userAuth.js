@@ -7,8 +7,15 @@ const userAuthHandler = asyncHandler(async (req, res, next) => {
     console.log(accessToken)
 
     // verify the token 
-    const jwt_payload= jwt.verify(accessToken, process.env.jwt_key);
+    try {
+        const jwt_payload= jwt.verify(accessToken, process.env.jwt_key);
     console.log(jwt_payload)
+    } catch (error) {
+        res.status(401).json({
+            status: "failed",
+            message:"Unauthorized!"
+        })
+    }
 
     next()
 })

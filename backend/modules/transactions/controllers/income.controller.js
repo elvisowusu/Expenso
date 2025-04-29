@@ -20,7 +20,7 @@ const income = asyncHandler(async (req, res) => {
         message:"amount must be a number"
     })
 
-    const newIncome = await transactionModel.create({
+    await transactionModel.create({
         user_id: req.user.id,
         amount: amount,
         remarks: remarks,

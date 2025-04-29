@@ -45,8 +45,7 @@ const expenses = asyncHandler(async (req, res) => {
     
     res.status(200).json({
         status: "success",
-        message: "expenses active",
-        expenses:addExpenses
+        message: "expenses added successful",
     })
 })
 

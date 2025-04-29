@@ -16,6 +16,10 @@ mongoose
     console.log("Database connection failed:", err);
   });
 
+// model initialization
+require("./models/users.model")
+require("./models/transactions.model");
+
 // Routes
 app.use("/api/users", userRouter);
 

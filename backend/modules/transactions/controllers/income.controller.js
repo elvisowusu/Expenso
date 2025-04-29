@@ -37,8 +37,7 @@ const income = asyncHandler(async (req, res) => {
     })
     res.status(200).json({
         status: "success",
-        message: "income active",
-        transaction:req.user,
+        message: "income added",
     })
 })
 

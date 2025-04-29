@@ -18,6 +18,11 @@ const expenses = asyncHandler(async (req, res) => {
         status: "failed",
         message:"amount must be a number"
     })
+
+    if(amount < 0)res.status(400).json({
+        status: "failed",
+        message:"amount must be a positive number"
+    })
     
     await transactionModel.create({
         user_id: req.user.id,
@@ -29,9 +34,11 @@ const expenses = asyncHandler(async (req, res) => {
     await userModel.updateOne({
         _id:req.user.id
     }, {
-        
+        $inc: {
+            balance:amount * -1
+        }
     }, {
-        
+        runValidators: true
     }
     )
     

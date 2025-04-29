@@ -25,6 +25,7 @@ const login = asyncHandler(async (req, res) => {
         });
     }
 
+    // verify password 
     const isPasswordValid = await argon2.verify(getUser.password, password)
       if (!isPasswordValid) {
         return res.status(401).json({

@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose")
+const mongoose = require("mongoose");
 
 
 const transactionSchema = new mongoose.Schema(
@@ -6,11 +6,11 @@ const transactionSchema = new mongoose.Schema(
         user_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "user",
-            required:true
+            required:[true,"user does not exist"]
         },
         amount: {
             type: Number,
-            required: true
+            required: [true,"amount required"]
         },
         transaction_type: {
             type: String,
@@ -19,7 +19,7 @@ const transactionSchema = new mongoose.Schema(
         },
         remarks: {
             type: String,
-            required:true
+            required:[true,"remarks required"]
         }
     }, {
         timestamps: true

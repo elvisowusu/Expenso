@@ -4,10 +4,14 @@ const login = require("./controllers/login.controller");
 const userDashBoard = require("./controllers/userDashBoard.controller");
 const userAuthHandler = require("../../middleware/userAuth");
 
-const userRouter = express.Router();
-userRouter.post("/register", register);
-userRouter.post("/login", login);
-userRouter.use(userAuthHandler);
-userRouter.get("/userDashboard", userDashBoard);
+const userRoutes = express.Router();
+// Public routes
+userRoutes.post("/register", register);
+userRoutes.post("/login", login);
 
-module.exports = userRouter;
+//middleware
+userRoutes.use(userAuthHandler);
+//Protected routes
+userRoutes.get("/userDashboard", userDashBoard);
+
+module.exports = userRoutes;

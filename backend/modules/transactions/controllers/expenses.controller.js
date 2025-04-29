@@ -1,6 +1,7 @@
 const asyncHandler = require("../../../handlers/asyncHandler");
 const transactionModel = require("../../../models/transactions.model");
 const userModel = require("../../../models/users.model");
+const validator = require("validator")
 
 const expenses = asyncHandler(async (req, res) => {
   

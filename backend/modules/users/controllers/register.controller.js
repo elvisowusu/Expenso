@@ -3,7 +3,16 @@ const jwtManager = require("../../../managers/jwtManager");
 const userModel = require("../../../models/users.model");
 
 const register = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
+
+  
+  // Check if password and confirmPassword match
+  if (password !== confirmPassword) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Passwords do not match",
+    });
+  }
 
   const newUser = await userModel.create({
     name,

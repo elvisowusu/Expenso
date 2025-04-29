@@ -1,7 +1,7 @@
 const asyncHandler = require("../../../handlers/asyncHandler");
+const jwtManager = require("../../../managers/jwtManager");
 const userModel = require("../../../models/users.model");
 const argon2 = require("argon2")
-const jwt = require("jsonwebtoken")
 
 const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
@@ -35,16 +35,12 @@ const login = asyncHandler(async (req, res) => {
     }
 
     // generating access token 
-    const accessToken = await jwt.sign({
-        id: getUser._id,
-        name: getUser.name,
-    }, process.env.jwt_key)
-    
+    const accessToken = jwtManager(getUser)
 
     res.status(200).json({
         status: 'success',
         message: 'login successful',
-        token: accessToken
+        accessToken: accessToken
     })
 })
 

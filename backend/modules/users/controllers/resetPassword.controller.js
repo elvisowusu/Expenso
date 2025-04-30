@@ -19,7 +19,7 @@ const resetPassword = asyncHandler(async (req, res) => {
     await emailManager(
         getUser.email,
         "Password Reset",
-        "Password Reset",
+        "Password has been reset successfully ",
         "Password has been reset successfully "
     )
     res.status(200).json({

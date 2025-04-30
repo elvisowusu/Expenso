@@ -31,7 +31,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     await emailManager(
         email,
         "Password Reset",
-        "Reset your password",
+        "Password reset code is "+ resetCode,
         "Password reset code is "+ resetCode
     )
     

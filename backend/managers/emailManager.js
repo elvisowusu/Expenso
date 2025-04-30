@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer")
-const emailManager = async (to,html,subject, text ) => {
+const emailManager = async (to,subject,html, text ) => {
     // Looking to send emails in production? Check out our Email API/SMTP product!
   var transport = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",

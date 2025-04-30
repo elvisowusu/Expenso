@@ -2,6 +2,7 @@ const asyncHandler = require("../../../handlers/asyncHandler");
 const emailManager = require("../../../managers/emailManager");
 const jwtManager = require("../../../managers/jwtManager");
 const userModel = require("../../../models/users.model");
+const argon2 = require("argon2");
 
 const register = asyncHandler(async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
@@ -14,10 +15,11 @@ const register = asyncHandler(async (req, res) => {
     });
   }
 
+  const hashedPassword = await argon2.hash(password);
   const newUser = await userModel.create({
     name,
     email,
-    password,
+    password: hashedPassword,
   });
 
   const accessToken = jwtManager(newUser);

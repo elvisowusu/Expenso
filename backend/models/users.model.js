@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const argon2 = require("argon2");
 
 const userSchema = new mongoose.Schema(
   {
@@ -27,14 +26,6 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-userSchema.pre("validate", async function (next) {
-  if (this.isModified("password")) {
-    this.password = await argon2.hash(this.password);
-  }
-  next();
-});
-
 const userModel = mongoose.model("user", userSchema);
 
 module.exports = userModel;

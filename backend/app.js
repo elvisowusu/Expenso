@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const transactionRoutes = require("./modules/transactions/transactions.route");
 const userRoutes = require("./modules/users/users.route");
@@ -6,6 +7,7 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Connect to MongoDB
 mongoose
@@ -24,6 +26,14 @@ require("./models/transactions.model");
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
+
+// fallback route
+app.all("*", (req, res, next) => {
+  res.status(400).json({
+    status: "failed",
+    message:"Not found"
+  })
+})
 
 // Health check
 app.get("/", (req, res) =>

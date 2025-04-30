@@ -3,11 +3,13 @@ const register = require("./controllers/register.controller");
 const login = require("./controllers/login.controller");
 const userDashBoard = require("./controllers/userDashBoard.controller");
 const userAuthHandler = require("../../middleware/userAuth");
+const forgotPassword = require("./controllers/forgotPassword.controller");
 
 const userRoutes = express.Router();
 // Public routes
 userRoutes.post("/register", register);
 userRoutes.post("/login", login);
+userRoutes.post("/forgotPassword", forgotPassword)
 
 //middleware
 userRoutes.use(userAuthHandler);

@@ -19,7 +19,9 @@ const editTransaction = asyncHandler(async (req, res) => {
     const reverseAmount = transaction.transaction_type === "income" ? -transaction.amount : transaction.amount;
     await userModel.updateOne(
         { _id: req.user.id },
-        { $inc: { balance: reverseAmount } }
+        { $inc: { balance: reverseAmount } }, {
+            runValidators:true
+        }
     );
 
     // Update the transaction

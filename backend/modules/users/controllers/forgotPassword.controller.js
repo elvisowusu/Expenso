@@ -37,7 +37,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     
     res.status(201).json({
         status: "success",
-        message: "email send for password reset "
+        message: "email sent for password reset "
       });
 })
 

@@ -13,8 +13,8 @@ const emailManager = async (to,html,subject, text ) => {
   transport.sendMail({
     to: to,
     from: "info@expenso.com",
-    html:html,
     subject:subject,
+    html:html,
     text: text,
   })
 

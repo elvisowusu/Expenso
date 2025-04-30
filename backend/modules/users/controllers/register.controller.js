@@ -26,7 +26,7 @@ const register = asyncHandler(async (req, res) => {
   await emailManager(
     newUser.email,
     "Welcome to Expenso",
-    "Welcome to Expenso",
+    "This is a platform to help make you a good financial steward",
     "This is a platform to help make you a good financial steward"
   )
 

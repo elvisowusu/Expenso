@@ -1,6 +1,6 @@
 const asyncHandler = require("../../../handlers/asyncHandler");
+const emailManager = require("../../../managers/emailManager");
 const userModel = require("../../../models/users.model");
-const nodemailer = require("nodemailer")
 
 const forgotPassword = asyncHandler(async (req, res) => {
     const { email } = req.body;
@@ -28,22 +28,12 @@ const forgotPassword = asyncHandler(async (req, res) => {
         runValidators:true
     })
 
-      // Looking to send emails in production? Check out our Email API/SMTP product!
-      var transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-          user: "ea9f630d55a164",
-          pass: process.env.nodeMailer_key,
-        },
-      });
-    
-      transport.sendMail({
-        to: email,
-        from: "info@expenso.com",
-          text: "Password reset code is " + resetCode,
-        subject:"Password Rest"
-      })
+    await emailManager(
+        email,
+        "Password Reset",
+        "Reset your password",
+        "Password reset code is "+ resetCode
+    )
     
     res.status(201).json({
         status: "success",

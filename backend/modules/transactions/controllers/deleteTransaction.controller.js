@@ -33,6 +33,8 @@ const deleteTransaction = asyncHandler(async (req, res) => {
                 $inc: {
                     balance: transaction.amount * -1,
                 },
+            }, {
+                runValidators:true
             }
         );
     }

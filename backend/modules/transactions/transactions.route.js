@@ -3,6 +3,7 @@ const expenses = require("./controllers/expenses.controller");
 const income = require("./controllers/income.controller");
 const userAuthHandler = require("../../middleware/userAuth");
 const getTransactions = require("./controllers/getTransactions.controller");
+const deleteTransaction = require("./controllers/deleteTransaction.controller");
 
 
 const transactionRoutes = express.Router();
@@ -15,5 +16,6 @@ transactionRoutes.use(userAuthHandler);
 transactionRoutes.post("/expenses", expenses)
 transactionRoutes.post("/income", income)
 transactionRoutes.get("/", getTransactions)
+transactionRoutes.delete("/:transactionId",deleteTransaction)
 
 module.exports = transactionRoutes

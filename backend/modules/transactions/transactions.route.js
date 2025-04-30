@@ -4,6 +4,7 @@ const income = require("./controllers/income.controller");
 const userAuthHandler = require("../../middleware/userAuth");
 const getTransactions = require("./controllers/getTransactions.controller");
 const deleteTransaction = require("./controllers/deleteTransaction.controller");
+const editTransaction = require("./controllers/editTransactions.controller");
 
 
 const transactionRoutes = express.Router();
@@ -16,6 +17,7 @@ transactionRoutes.use(userAuthHandler);
 transactionRoutes.post("/expenses", expenses)
 transactionRoutes.post("/income", income)
 transactionRoutes.get("/", getTransactions)
-transactionRoutes.delete("/:transactionId",deleteTransaction)
+transactionRoutes.delete("/:transactionId", deleteTransaction)
+transactionRoutes.patch("/",editTransaction)
 
 module.exports = transactionRoutes

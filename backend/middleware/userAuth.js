@@ -5,7 +5,7 @@ const userAuthHandler = asyncHandler(async (req, res, next) => {
     
     try {
         // get the token generated from login
-        const accessToken = req.headers.authorization.replace("Bearer ","")
+        const accessToken = req.headers.authorization.replace("Bearer ", "")
 
         // verify the token 
         const jwt_payload = jwt.verify(accessToken, process.env.jwt_key);
@@ -16,7 +16,7 @@ const userAuthHandler = asyncHandler(async (req, res, next) => {
     } catch (error) {
         return res.status(401).json({
             status: "failed",
-            message:"Unauthorized!"
+            message: "Unauthorized!"
         })
     }
 
